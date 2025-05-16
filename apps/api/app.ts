@@ -1,12 +1,16 @@
+import cors from "@fastify/cors";
 import Fastify from "fastify";
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
-
 
 const PORT = parseInt(process.env.PORT || "3030", 10);
 
 const fastify = Fastify({
   logger: true,
 }).withTypeProvider<TypeBoxTypeProvider>();
+
+fastify.register(cors, {
+  origin: true, // allow cors for everyone for testing purposes
+});
 
 fastify.ready().then(() => {
   // TODO: scheduler will go here
