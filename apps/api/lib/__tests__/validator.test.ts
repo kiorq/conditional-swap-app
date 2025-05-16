@@ -5,7 +5,7 @@ import {
   SwapRequest,
   SwapRequestStatus,
   SwapCheckResult,
-} from "../../data";
+} from "../data/models";
 
 describe("Swap Validators", () => {
   let swapRequest: SwapRequest;

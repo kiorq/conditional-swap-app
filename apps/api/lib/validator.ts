@@ -3,7 +3,7 @@ import {
   SwapCheckResult,
   SwapRequest,
   SwapRequestStatus,
-} from "../data";
+} from "./data/models";
 
 export const validateSwapRequest = (
   swapRequest: SwapRequest,
