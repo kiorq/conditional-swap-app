@@ -155,6 +155,7 @@ const CurrencyForm = ({
 
   useEffect(() => {
     if (!initialData) return;
+
     setFromCurrency(initialData.fromCurrency);
     setToCurrency(initialData.toCurrency);
     setFromAmount(initialData.fromAmount);
@@ -180,7 +181,7 @@ const CurrencyForm = ({
       fromAmount,
       toAmount,
     });
-  }, [fromCurrency, toCurrency, fromAmount, toAmount, handleChange]);
+  }, [fromCurrency, toCurrency, fromAmount, toAmount]);
 
   return (
     <div className=" w-full bg-gray-900 rounded-lg border border-gray-800 items-center">

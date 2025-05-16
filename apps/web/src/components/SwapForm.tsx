@@ -43,21 +43,13 @@ const SwapForm = ({
     }));
   };
 
-  const handleFormChange = (formData: any) => {
-    setFormData((prev) => {
-      // TODO: automatically convert fromAmount to toAmount if from or to has changed
-      return {
-        ...prev,
-        ...formData,
-      };
-    });
-  };
+
 
   return (
     <div className="flex flex-col gap-4 w-full">
       <CurrencyForm
         currencies={currencies ? Object.keys(currencies) : []}
-        onChange={handleFormChange}
+        onChange={setFormData}
         editable={isSubmittable}
         initialData={initialData}
       />

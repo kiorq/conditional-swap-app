@@ -87,6 +87,7 @@ const plugin: FastifyPluginAsyncTypebox = async function (fastify, _opts) {
     async (req) => {
       const createdSwapRequest = await createSwapRequest({
         ...req.body,
+        minThreshold: req.body.toAmount / req.body.fromAmount,
         startDate: new Date(req.body.startDate),
         endDate: new Date(req.body.endDate),
       });

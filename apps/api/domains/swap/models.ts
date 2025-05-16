@@ -79,7 +79,6 @@ export class MarketTokenExchangeRate {
   public fromToken: string;
   public toToken: string;
   public exchangeRate: number;
-  public network: string;
   public timestamp: Date;
 
   constructor({
@@ -87,21 +86,18 @@ export class MarketTokenExchangeRate {
     fromToken,
     toToken,
     exchangeRate,
-    network,
     timestamp,
   }: {
     id: string;
     fromToken: string;
     toToken: string;
     exchangeRate: number;
-    network: string;
     timestamp: Date;
   }) {
     this.id = id;
     this.fromToken = fromToken;
     this.toToken = toToken;
     this.exchangeRate = exchangeRate;
-    this.network = network;
     this.timestamp = timestamp;
   }
 }

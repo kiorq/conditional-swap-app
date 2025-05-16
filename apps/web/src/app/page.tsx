@@ -10,6 +10,7 @@ export default function Home() {
   const createSwapRequest = useCreateSwapRequest();
   const onSubmit = (formData: any) => {
     debugger;
+    setError(null);
     // frontend validation
     if (!formData.startDate) {
       setError("Start date is required");
@@ -29,7 +30,7 @@ export default function Home() {
       setError("To amount must be greater than 0");
       return;
     }
-    const minThreshold = formData.fromAmount / formData.toAmount;
+    const minThreshold = formData.toAmount / formData.fromAmount;
     createSwapRequest.mutate({
       fromToken: formData.fromCurrency,
       toToken: formData.toCurrency,
@@ -56,7 +57,7 @@ export default function Home() {
   }, [createSwapRequest.error]);
 
   return (
-    <div className="min-h-screen w-screen flex flex-col items-center justify-center">
+    <div className=" w-screen flex flex-col items-center justify-center">
       {error && (
         <div className="px-4 w-full mb-3">
           <div className="text-red-500 bg-red-500/10 py-1 w-full rounded-md text-center flex flex-row items-center justify-center gap-2">

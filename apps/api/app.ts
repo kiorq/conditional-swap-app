@@ -1,6 +1,7 @@
 import cors from "@fastify/cors";
 import Fastify from "fastify";
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
+import runSwapCron from "./cron/swap_cron";
 
 const PORT = parseInt(process.env.PORT || "3030", 10);
 
@@ -13,7 +14,10 @@ fastify.register(cors, {
 });
 
 fastify.ready().then(() => {
-  // TODO: scheduler will go here
+  // HACK: scheduler will go here (to not block server startup)
+  setInterval(() => {
+    runSwapCron();
+  }, 10000);
 });
 
 fastify.register(require("./domains/swap/routes"), {

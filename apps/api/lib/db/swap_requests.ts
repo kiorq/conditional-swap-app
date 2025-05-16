@@ -1,6 +1,6 @@
 import { db } from "./index";
 import { swapRequests } from "./schema";
-import { eq, and, gte, lte } from "drizzle-orm";
+import { eq, and, gte, lte, desc } from "drizzle-orm";
 import { SwapRequestStatus } from "../../domains/swap/models";
 import { SQL } from "drizzle-orm";
 
@@ -69,11 +69,13 @@ export async function getSwapRequests(filters?: {
     }
 
     if (conditions.length > 0) {
-      return query.where(and(...conditions));
+      return query
+        .where(and(...conditions))
+        .orderBy(desc(swapRequests.endDate));
     }
   }
 
-  return query;
+  return query.orderBy(desc(swapRequests.endDate));
 }
 
 // Update a swap request

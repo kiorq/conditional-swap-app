@@ -19,7 +19,7 @@ const runSwapCron = async () => {
       await queryPendingSwapRequests(tokenExchangeRate);
 
     console.log(
-      `Processing swap requests for ${tokenExchangeRate.fromToken} -> ${tokenExchangeRate.toToken} @ ${tokenExchangeRate.exchangeRate}`
+      `Processing swap requests for ${tokenExchangeRate.fromToken} -> ${tokenExchangeRate.toToken} @ ${tokenExchangeRate.exchangeRate} (${pendingSwapRequests.length} requests)`
     );
 
     for (const swapRequest of pendingSwapRequests) {
@@ -28,6 +28,7 @@ const runSwapCron = async () => {
           swapRequest,
           tokenExchangeRate
         );
+        console.log(`Processing swap request ${swapRequest.id}: ${result}`);
 
         // handle the result
         switch (result) {
