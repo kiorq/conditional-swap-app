@@ -13,7 +13,11 @@ fastify.ready().then(() => {
 });
 
 fastify.register(require("./domains/swap/routes"), {
-  prefix: "/swap",
+  prefix: "/swap_requests",
+});
+
+fastify.register(require("./domains/exchange/routes"), {
+  prefix: "/exchange",
 });
 
 // Start the server

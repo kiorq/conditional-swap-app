@@ -78,7 +78,7 @@ const SwapRequestsList = ({ requests }: { requests: SwapRequest[] }) => {
           </div>
           {/* Date */}
           <div className="ml-auto text-gray-500 text-xs font-mono">
-            {new Date(req.date).toLocaleString()}
+            2025-01-01
           </div>
         </div>
       ))}
