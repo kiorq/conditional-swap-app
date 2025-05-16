@@ -50,7 +50,7 @@ export default function SwapDetail() {
           <div className="flex flex-col md:flex-row gap-4">
             <ValueCard
               value={swapRequest?.minThreshold || 0}
-              label="Minimum Threshold"
+              label="Min. Threshold"
             />
             <OrderSteps status={swapRequest?.status || ""} />
           </div>

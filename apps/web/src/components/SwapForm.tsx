@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Button from "./Button";
 import CurrencyForm from "./CurrencyForm";
 import DateRange from "./DateRange";
@@ -43,12 +43,14 @@ const SwapForm = ({
     }));
   };
 
-
+  const handleSubmit = useCallback(() => {
+    onSubmit(formData);
+  }, [formData, onSubmit]);
 
   return (
     <div className="flex flex-col gap-4 w-full">
       <CurrencyForm
-        currencies={currencies ? Object.keys(currencies) : []}
+        currencies={currencies}
         onChange={setFormData}
         editable={isSubmittable}
         initialData={initialData}
@@ -67,7 +69,7 @@ const SwapForm = ({
             </Button>
           )}
           {isSubmittable && (
-            <Button onClick={() => onSubmit(formData)} variant="primary">
+            <Button onClick={handleSubmit} variant="primary">
               Submit
             </Button>
           )}

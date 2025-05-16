@@ -2,6 +2,12 @@
 
 by Kirk Douglas
 
+## Setup
+```
+npm i
+npm run dev
+```
+
 ## **Repo Structure Plan**
 
 I’m building this using a TurboRepo monorepo, with two apps written entirely in TypeScript:
@@ -57,7 +63,8 @@ Still finalizing and will update once the schema stabilizes.
 
 * *Performance optimization*: Crypto markets are volatile. Ideally, I would use Redis to cache {from, to, min_threshold} so the job can pre-filter which token pairs need database lookups. For now, I’ll rely on SQL filters using time and threshold ranges.
 * *Authentication*: Would like to use Clerk or another OAuth flow to support multi-user swap histories.
-* *Wallet validation*: Might explore mocking wallet validation on the frontend or stubbing an API.
+* *Wallet validation*: Mocking wallet validation on the frontend or stubbing an API.
+* *Logging*: Audit log changes to swap request
 
 ## AI Usage
 

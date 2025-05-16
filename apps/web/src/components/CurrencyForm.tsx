@@ -14,7 +14,7 @@ const CurrencyInput = ({
 }: {
   label: string;
   currency: string;
-  currencies: string[];
+  currencies: Record<string, number>;
   setCurrency: (currency: string) => void;
   amount: number;
   setAmount: (amount: number) => void;
@@ -93,7 +93,7 @@ const CurrencyInput = ({
         </button>
         {dropdownOpen && (
           <div className="absolute z-30 mt-2 w-40 bg-gray-900 border border-gray-700 rounded-lg shadow-lg py-1">
-            {currencies.map((cur) => (
+            {Object.keys(currencies || {}).map((cur) => (
               <button
                 key={cur}
                 className={`w-full flex items-center gap-2 px-4 py-2 text-left text-white font-mono hover:bg-gray-800 focus:bg-gray-800 transition-colors rounded-md ${
@@ -152,10 +152,13 @@ const CurrencyForm = ({
   );
   const [fromAmount, setFromAmount] = useState(initialData?.fromAmount || 0);
   const [toAmount, setToAmount] = useState(initialData?.toAmount || 0);
+  const initialDataSetRef = useRef(false);
 
   useEffect(() => {
     if (!initialData) return;
+    if (initialDataSetRef.current) return;
 
+    initialDataSetRef.current = true;
     setFromCurrency(initialData.fromCurrency);
     setToCurrency(initialData.toCurrency);
     setFromAmount(initialData.fromAmount);
