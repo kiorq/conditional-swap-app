@@ -12,8 +12,8 @@ fastify.ready().then(() => {
   // TODO: scheduler will go here
 });
 
-fastify.register(require("./routes/swap_requests"), {
-  prefix: "/swap_requests",
+fastify.register(require("./domains/swap/routes"), {
+  prefix: "/swap",
 });
 
 // Start the server
