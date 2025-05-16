@@ -63,20 +63,27 @@ describe("Swap Cron", () => {
 
   it("should handle handle fulfillable swap requests", async () => {
     const exchangeRates = [
-      new MarketTokenExchangeRate("1", "BTC", "USDT", 100, "1", new Date()),
+      new MarketTokenExchangeRate({
+        id: "1",
+        fromToken: "BTC",
+        toToken: "USDT",
+        exchangeRate: 100,
+        network: "1",
+        timestamp: new Date(),
+      }),
     ];
     const swapRequests = [
-      new SwapRequest(
-        "1",
-        SwapRequestStatus.PENDING,
-        "BTC",
-        "USDT",
-        100,
-        100,
-        100,
-        subMinutes(new Date(), 1),
-        addMinutes(new Date(), 1)
-      ),
+      new SwapRequest({
+        id: "1",
+        status: SwapRequestStatus.PENDING,
+        fromToken: "BTC",
+        toToken: "USDT",
+        fromAmount: 100,
+        toAmount: 100,
+        startDate: subMinutes(new Date(), 1),
+        endDate: addMinutes(new Date(), 1),
+        minThreshold: 100,
+      }),
     ];
     (lookupTokenExchangeRates as jest.Mock).mockResolvedValueOnce(
       exchangeRates

@@ -9,13 +9,13 @@ export const lookupTokenExchangeRates = async (
   // TODO: fetch from api
 
   return [
-    new MarketTokenExchangeRate(
-      "1",
-      tokenPair[0].fromToken,
-      tokenPair[0].toToken,
-      100,
-      "mainnet",
-      new Date()
-    ),
+    new MarketTokenExchangeRate({
+      id: "1",
+      fromToken: tokenPairs[0].fromToken,
+      toToken: tokenPairs[0].toToken,
+      exchangeRate: 100,
+      network: "mainnet",
+      timestamp: new Date(),
+    }),
   ];
 };

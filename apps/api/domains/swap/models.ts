@@ -16,35 +16,77 @@ export enum SwapCheckResult {
 }
 
 export class SwapRequest {
-  constructor(
-    public id: string,
-    // metadata
-    public status: SwapRequestStatus,
-    // token
-    public fromToken: string,
-    public toToken: string,
-    // amount
-    public fromAmount: number,
-    public toAmount: number,
-    // min threshold
-    public minThreshold: number,
-    public startDate: Date,
-    public endDate: Date
+  public id: string;
+  public status: SwapRequestStatus;
+  public fromToken: string;
+  public toToken: string;
+  public fromAmount: number;
+  public toAmount: number;
+  public minThreshold: number;
+  public startDate: Date;
+  public endDate: Date;
 
-    // TODO: add wallet information
-  ) {}
+  constructor({
+    id,
+    status,
+    fromToken,
+    toToken,
+    fromAmount,
+    toAmount,
+    minThreshold,
+    startDate,
+    endDate,
+  }: {
+    id: string;
+    status: SwapRequestStatus;
+    fromToken: string;
+    toToken: string;
+    fromAmount: number;
+    toAmount: number;
+    minThreshold: number;
+    startDate: Date;
+    endDate: Date;
+  }) {
+    this.id = id;
+    this.status = status;
+    this.fromToken = fromToken;
+    this.toToken = toToken;
+    this.fromAmount = fromAmount;
+    this.toAmount = toAmount;
+    this.minThreshold = minThreshold;
+    this.startDate = startDate;
+    this.endDate = endDate;
+  }
 }
 
 export class MarketTokenExchangeRate {
-  constructor(
-    public id: string,
-    // token
-    public fromToken: string,
-    public toToken: string,
-    // exchange rate
-    public exchangeRate: number,
-    // metadata
-    public network: string,
-    public timestamp: Date
-  ) {}
+  public id: string;
+  public fromToken: string;
+  public toToken: string;
+  public exchangeRate: number;
+  public network: string;
+  public timestamp: Date;
+
+  constructor({
+    id,
+    fromToken,
+    toToken,
+    exchangeRate,
+    network,
+    timestamp,
+  }: {
+    id: string;
+    fromToken: string;
+    toToken: string;
+    exchangeRate: number;
+    network: string;
+    timestamp: Date;
+  }) {
+    this.id = id;
+    this.fromToken = fromToken;
+    this.toToken = toToken;
+    this.exchangeRate = exchangeRate;
+    this.network = network;
+    this.timestamp = timestamp;
+  }
 }

@@ -8,7 +8,8 @@
     "start": "node dist/app.js",
     "test": "jest",
     "db:generate": "drizzle-kit generate",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "pre:dev": "npm run db:generate && npm run db:push"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.1",

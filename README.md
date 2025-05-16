@@ -63,3 +63,4 @@ Still finalizing and will update once the schema stabilizes.
 
 * Cursor (for code autocomplete and inline refactoring)
 * Spell checking
+* Used to create ui components (e.g: modals, forms)

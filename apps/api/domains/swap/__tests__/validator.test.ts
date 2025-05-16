@@ -13,26 +13,26 @@ describe("Swap Validators", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    swapRequest = new SwapRequest(
-      "1",
-      SwapRequestStatus.PENDING,
-      "ETH",
-      "USDC",
-      100,
-      120,
-      120,
-      subMinutes(new Date(), 10),
-      addMinutes(new Date(), 20)
-    );
+    swapRequest = new SwapRequest({
+      id: "1",
+      status: SwapRequestStatus.PENDING,
+      fromToken: "ETH",
+      toToken: "USDC",
+      fromAmount: 100,
+      toAmount: 120,
+      startDate: subMinutes(new Date(), 10),
+      endDate: addMinutes(new Date(), 20),
+      minThreshold: 120,
+    });
 
-    currentMarketTokenExchangeRate = new MarketTokenExchangeRate(
-      "1",
-      "ETH",
-      "USDC",
-      100,
-      "mainnet",
-      new Date()
-    );
+    currentMarketTokenExchangeRate = new MarketTokenExchangeRate({
+      id: "1",
+      fromToken: "ETH",
+      toToken: "USDC",
+      exchangeRate: 100,
+      network: "mainnet",
+      timestamp: new Date(),
+    });
   });
 
   it("should fulfill a swap request", async () => {
