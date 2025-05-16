@@ -1,4 +1,4 @@
-import { MarketTokenExchangeRate } from "./data/models";
+import { MarketTokenExchangeRate } from "../swap/models";
 
 export const lookupTokenExchangeRates = async (
   tokenPairs: {

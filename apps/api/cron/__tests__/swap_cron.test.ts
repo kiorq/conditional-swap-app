@@ -1,25 +1,28 @@
 import { addMinutes, subMinutes } from "date-fns";
-import { SwapRequestStatus } from "../../lib/data/models";
-import { MarketTokenExchangeRate, SwapRequest } from "../../lib/data/models";
+import { SwapRequestStatus } from "../../domains/swap/models";
+import {
+  MarketTokenExchangeRate,
+  SwapRequest,
+} from "../../domains/swap/models";
 import runSwapCron from "../swap_cron";
 import {
   queryActiveTokenPairs,
   queryPendingSwapRequests,
-} from "../../lib/data/query";
-import { lookupTokenExchangeRates } from "../../lib/exchange";
-import { executeSwap } from "../../lib/swap_executor";
+} from "../../domains/swap/queries";
+import { lookupTokenExchangeRates } from "../../domains/exchange/service";
+import { executeSwap } from "../../domains/swap/executor";
 
 // Mock the functions
-jest.mock("../../lib/data/query", () => ({
+jest.mock("../../domains/swap/queries", () => ({
   queryActiveTokenPairs: jest.fn().mockResolvedValue([]),
   queryPendingSwapRequests: jest.fn().mockResolvedValue([]),
 }));
 
-jest.mock("../../lib/exchange", () => ({
+jest.mock("../../domains/exchange/service", () => ({
   lookupTokenExchangeRates: jest.fn().mockResolvedValue([]),
 }));
 
-jest.mock("../../lib/swap_executor", () => ({
+jest.mock("../../domains/swap/executor", () => ({
   executeSwap: jest.fn().mockResolvedValue(undefined),
 }));
 

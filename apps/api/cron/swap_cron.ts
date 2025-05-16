@@ -1,11 +1,11 @@
-import { SwapCheckResult } from "../lib/data/models";
+import { SwapCheckResult } from "../domains/swap/models";
 import {
   queryActiveTokenPairs,
   queryPendingSwapRequests,
-} from "../lib/data/query";
-import { lookupTokenExchangeRates } from "../lib/exchange";
-import { executeSwap } from "../lib/swap_executor";
-import { validateSwapRequest } from "../lib/validator";
+} from "../domains/swap/queries";
+import { lookupTokenExchangeRates } from "../domains/exchange/service";
+import { executeSwap } from "../domains/swap/executor";
+import { validateSwapRequest } from "../domains/swap/validator";
 
 const runSwapCron = async () => {
   console.log("Starting swap service cron job");

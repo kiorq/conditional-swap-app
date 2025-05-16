@@ -1,4 +1,4 @@
-import { MarketTokenExchangeRate, SwapRequest } from "./data/models";
+import { MarketTokenExchangeRate, SwapRequest } from "./models";
 
 export async function executeSwap(
   swapRequest: SwapRequest,
