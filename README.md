@@ -1,84 +1,65 @@
-# Turborepo starter
+# **Conditional Swap**
 
-This Turborepo starter is maintained by the Turborepo core team.
+by Kirk Douglas
 
-## Using this example
+## **Repo Structure Plan**
 
-Run the following command:
+I’m building this using a TurboRepo monorepo, with two apps written entirely in TypeScript:
 
-```sh
-npx create-turbo@latest
-```
+* apps/web: Next.js frontend
+* apps/api: Node.js backend (TBD: Fastify or Express)
 
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+The goal is for anyone to spin this up easily:
 
 ```
-cd my-turborepo
-pnpm build
+npm install   # install all dependencies
+
+npm run dev   # run both frontend and backend
+
+npm run test  # run tests
 ```
 
-### Develop
+## Backend Structure
 
-To develop all apps and packages, run the following command:
+* Local SQLite database via a lightweight Node ORM (likely Prisma or Drizzle)
+* Basic CRUD API endpoints to manage swap requests
+* Background job (cron or interval-based) that:
+* Pulls current prices
+* Checks all active swaps
+* Updates status to executed or expired based on time and threshold
 
-```
-cd my-turborepo
-pnpm dev
-```
+## Frontend Functionality
 
-### Remote Caching
+Start with a barebones UI that can:
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+* Create swap requests
+* List active and historical swaps
+* View details of individual swaps
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+Design and polish will come later after the system is fully functional and tested.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## Swap Logic and Execution
 
-```
-cd my-turborepo
-npx turbo login
-```
+This is the core engine. A background job will:
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+* Run every minute
+* Query current market prices
+* Evaluate each pending swap
+* Fulfill or expire based on the swap’s threshold and time window
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+This part will be fully tested and is where most of the logic lives.
 
-```
-npx turbo link
-```
+## **Data Entities**
 
-## Useful Links
+Still finalizing and will update once the schema stabilizes.
 
-Learn more about the power of Turborepo:
+## Additional Enhancements (time permitting)
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+* *Performance optimization*: Crypto markets are volatile. Ideally, I would use Redis to cache {from, to, min_threshold} so the job can pre-filter which token pairs need database lookups. For now, I’ll rely on SQL filters using time and threshold ranges.
+* *Authentication*: Would like to use Clerk or another OAuth flow to support multi-user swap histories.
+* *Wallet validation*: Might explore mocking wallet validation on the frontend or stubbing an API.
+
+## AI Usage
+
+* Cursor (for code autocomplete and inline refactoring)
+* Spell checking
