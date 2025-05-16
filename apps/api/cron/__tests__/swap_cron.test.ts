@@ -78,11 +78,11 @@ describe("Swap Cron", () => {
         status: SwapRequestStatus.PENDING,
         fromToken: "BTC",
         toToken: "USDT",
-        fromAmount: 100,
-        toAmount: 100,
+        fromAmount: "100",
+        toAmount: "100",
         startDate: subMinutes(new Date(), 1),
         endDate: addMinutes(new Date(), 1),
-        minThreshold: 100,
+        minThreshold: "100",
       }),
     ];
     (lookupTokenExchangeRates as jest.Mock).mockResolvedValueOnce(

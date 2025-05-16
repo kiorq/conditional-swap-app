@@ -20,9 +20,9 @@ export class SwapRequest {
   public status: SwapRequestStatus;
   public fromToken: string;
   public toToken: string;
-  public fromAmount: number;
-  public toAmount: number;
-  public minThreshold: number;
+  public fromAmount: string;
+  public toAmount: string;
+  public minThreshold: string;
   public startDate: Date;
   public endDate: Date;
 
@@ -41,9 +41,9 @@ export class SwapRequest {
     status: SwapRequestStatus;
     fromToken: string;
     toToken: string;
-    fromAmount: number;
-    toAmount: number;
-    minThreshold: number;
+    fromAmount: string;
+    toAmount: string;
+    minThreshold: string;
     startDate: Date;
     endDate: Date;
   }) {
@@ -56,6 +56,21 @@ export class SwapRequest {
     this.minThreshold = minThreshold;
     this.startDate = startDate;
     this.endDate = endDate;
+  }
+
+  fromAmountNumber(): number {
+    // TODO: will need improved precision for large decimals
+    return parseFloat(this.fromAmount);
+  }
+
+  toAmountNumber(): number {
+    // TODO: will need improved precision for large decimals
+    return parseFloat(this.toAmount);
+  }
+
+  minThresholdNumber(): number {
+    // TODO: will need improved precision for large decimals
+    return parseFloat(this.minThreshold);
   }
 }
 

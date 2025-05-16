@@ -40,7 +40,10 @@ export const validateSwapRequest = (
   }
 
   // not ready (below min threshold)
-  if (currentMarketTokenExchangeRate.exchangeRate < swapRequest.minThreshold) {
+  if (
+    currentMarketTokenExchangeRate.exchangeRate <
+    swapRequest.minThresholdNumber()
+  ) {
     return SwapCheckResult.SKIP_NOT_READY;
   }
 

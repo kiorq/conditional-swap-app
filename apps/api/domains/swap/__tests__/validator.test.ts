@@ -18,11 +18,11 @@ describe("Swap Validators", () => {
       status: SwapRequestStatus.PENDING,
       fromToken: "ETH",
       toToken: "USDC",
-      fromAmount: 100,
-      toAmount: 120,
+      fromAmount: "100",
+      toAmount: "120",
       startDate: subMinutes(new Date(), 10),
       endDate: addMinutes(new Date(), 20),
-      minThreshold: 120,
+      minThreshold: "120",
     });
 
     currentMarketTokenExchangeRate = new MarketTokenExchangeRate({
@@ -42,7 +42,7 @@ describe("Swap Validators", () => {
     swapRequest.status = SwapRequestStatus.PENDING;
     swapRequest.startDate = subMinutes(new Date(), 10);
     swapRequest.endDate = addMinutes(new Date(), 20);
-    swapRequest.minThreshold = 100;
+    swapRequest.minThreshold = "100";
 
     // created current market token exchange rate (e.g: retrieved from an external API)
     currentMarketTokenExchangeRate.fromToken = "ETH";
@@ -67,7 +67,7 @@ describe("Swap Validators", () => {
     swapRequest.status = SwapRequestStatus.PENDING;
     swapRequest.startDate = subMinutes(new Date(), 20);
     swapRequest.endDate = subMinutes(new Date(), 5);
-    swapRequest.minThreshold = 120;
+    swapRequest.minThreshold = "120";
 
     // created current market token exchange rate (e.g: retrieved from an external API)
     currentMarketTokenExchangeRate.fromToken = "ETH";
@@ -92,7 +92,7 @@ describe("Swap Validators", () => {
     swapRequest.status = SwapRequestStatus.FULFILLED;
     swapRequest.startDate = subMinutes(new Date(), 10);
     swapRequest.endDate = addMinutes(new Date(), 20);
-    swapRequest.minThreshold = 120;
+    swapRequest.minThreshold = "120";
 
     // created current market token exchange rate (e.g: retrieved from an external API)
     currentMarketTokenExchangeRate.fromToken = "ETH";
@@ -116,7 +116,7 @@ describe("Swap Validators", () => {
     swapRequest.status = SwapRequestStatus.FULFILLED;
     swapRequest.startDate = subMinutes(new Date(), 10);
     swapRequest.endDate = addMinutes(new Date(), 20);
-    swapRequest.minThreshold = 120;
+    swapRequest.minThreshold = "120";
 
     // created current market token exchange rate (e.g: retrieved from an external API)
     currentMarketTokenExchangeRate.fromToken = "BTC";
