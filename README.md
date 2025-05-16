@@ -24,9 +24,9 @@ npm run test  # run tests
 * Local SQLite database via a lightweight Node ORM (likely Prisma or Drizzle)
 * Basic CRUD API endpoints to manage swap requests
 * Background job (cron or interval-based) that:
-  * Pulls current prices
-  * Checks all active swaps
-  * Updates status to executed or expired based on time and threshold
+* Pulls current prices
+* Checks all active swaps
+* Updates status to executed or expired based on time and threshold
 
 ## Frontend Functionality
 
@@ -55,12 +55,9 @@ Still finalizing and will update once the schema stabilizes.
 
 ## Additional Enhancements (time permitting)
 
-1. Performance optimization
-   Crypto markets are volatile. Ideally, I would use Redis to cache {from → to → min_threshold} so the job can pre-filter which token pairs need database lookups. For now, I’ll rely on SQL filters using time and threshold ranges.
-2. Authentication
-   Would like to use Clerk or another OAuth flow to support multi-user swap histories.
-3. Wallet validation
-   Might explore mocking wallet validation on the frontend or stubbing an API.
+* *Performance optimization*: Crypto markets are volatile. Ideally, I would use Redis to cache {from, to, min_threshold} so the job can pre-filter which token pairs need database lookups. For now, I’ll rely on SQL filters using time and threshold ranges.
+* *Authentication*: Would like to use Clerk or another OAuth flow to support multi-user swap histories.
+* *Wallet validation*: Might explore mocking wallet validation on the frontend or stubbing an API.
 
 ## AI Usage
 
