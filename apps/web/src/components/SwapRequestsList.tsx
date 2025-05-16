@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { currencyIcon, currencyName } from "@/lib/currencies";
 
 export type SwapRequest = {
@@ -29,9 +30,10 @@ const statusLabel = {
 };
 
 const SwapRequestsList = ({ requests }: { requests: SwapRequest[] }) => {
+  const router = useRouter();
   return (
     <div className="flex flex-col gap-3 w-full">
-      {requests.map((req) => (
+      {requests?.map((req) => (
         <div
           key={req.id}
           className="flex flex-row items-center bg-gray-900 rounded-lg border border-gray-800 px-6 py-4 cursor-pointer hover:border-blue-500 transition-all group shadow-sm"

@@ -1,5 +1,11 @@
 interface OrderStepsProps {
-  status: "pending" | "fulfilled" | "expired" | "cancelled" | "invalid";
+  status:
+    | "pending"
+    | "fulfilled"
+    | "expired"
+    | "cancelled"
+    | "invalid"
+    | string;
 }
 
 const stepsData = [

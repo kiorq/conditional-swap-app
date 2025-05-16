@@ -6,8 +6,28 @@ import DateRange from "./DateRange";
 
 import { useGetAvailableCurrencies } from "@/lib/api/hooks";
 
-const SwapForm = () => {
-  const { data: currencies, isLoading } = useGetAvailableCurrencies();
+const SwapForm = ({
+  message,
+  isSubmittable = false,
+  isCancelable = false,
+  onSubmit,
+  onCancel,
+  initialData,
+}: {
+  message?: string;
+  isSubmittable?: boolean;
+  isCancelable?: boolean;
+  onSubmit: (formData: any) => void;
+  onCancel: () => void;
+  isLoading?: boolean;
+  initialData?: {
+    fromCurrency: string;
+    toCurrency: string;
+    fromAmount: string;
+    toAmount: string;
+  };
+}) => {
+  const { data: currencies } = useGetAvailableCurrencies();
   const [formData, setFormData] = useState({
     fromCurrency: "eth",
     toCurrency: "btc",
@@ -15,28 +35,53 @@ const SwapForm = () => {
     toAmount: 0,
   });
 
+  const onDateRangeChange = (dateRange: { startDate: Date; endDate: Date }) => {
+    setFormData((prev) => ({
+      ...prev,
+      startDate: dateRange.startDate,
+      endDate: dateRange.endDate,
+    }));
+  };
+
+  const handleFormChange = (formData: any) => {
+    setFormData((prev) => {
+      // TODO: automatically convert fromAmount to toAmount if from or to has changed
+      return {
+        ...prev,
+        ...formData,
+      };
+    });
+  };
+
   return (
-    <form className="flex flex-col gap-4 w-full">
+    <div className="flex flex-col gap-4 w-full">
       <CurrencyForm
-        currencies={currencies}
-        onChange={setFormData}
-        isLoading={isLoading}
+        currencies={currencies ? Object.keys(currencies) : []}
+        onChange={handleFormChange}
+        editable={isSubmittable}
+        initialData={initialData}
       />
-      <div className="flex flex-row gap-2 justify-between">
-        <DateRange />
-        <div className="flex flex-row gap-2">
-          <div className="flex justify-center items-center mr-10">
-            <p className="text-sm text-gray-400">You cancelled this order</p>
+      <div className="flex flex-col md:flex-row gap-3 justify-between">
+        {isSubmittable && <DateRange onChange={onDateRangeChange} />}
+        {message && (
+          <div className="flex justify-center items-center ">
+            <p className="text-sm text-gray-400">{message}</p>
           </div>
-          <Button onClick={() => {}} variant="danger">
-            Cancel
-          </Button>
-          <Button onClick={() => {}} variant="primary">
-            Submit
-          </Button>
+        )}
+        <div className="flex flex-col md:flex-row gap-2">
+          {isCancelable && (
+            <Button onClick={() => onCancel()} variant="danger">
+              Cancel
+            </Button>
+          )}
+          {isSubmittable && (
+            <Button onClick={() => onSubmit(formData)} variant="primary">
+              Submit
+            </Button>
+          )}
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 

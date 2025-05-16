@@ -3,8 +3,12 @@ export const currencyIcon = (currency: string) => {
 };
 
 export const currencyName = (currency: string) => {
-  return {
-    eth: "Ethereum",
-    btc: "Bitcoin",
-  }[currency.toLowerCase()];
+  return (
+    {
+      eth: "Ethereum",
+      btc: "Bitcoin",
+      usdt: "Tether",
+      usdc: "USD Coin",
+    }[currency.toLowerCase()] || currency
+  );
 };

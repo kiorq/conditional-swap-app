@@ -1,3 +1,4 @@
+import { SwapRequest } from "@/app/types";
 import axios, { AxiosResponse } from "axios";
 
 const API_URL = "http://localhost:3030";
@@ -13,20 +14,23 @@ const handleError = (response: AxiosResponse) => {
 };
 
 const apiClient = {
-  getAllSwapRequests: async (): Promise<object[]> => {
+  getAllSwapRequests: async (): Promise<SwapRequest[]> => {
     const response = await axiosClient.get("/swap_requests");
     handleError(response);
-    return response.data;
+    return response.data.swap_requests;
   },
-  createSwapRequest: async (swapRequest: Record<string, any>) => {
+  createSwapRequest: async (
+    swapRequest: Record<string, any>
+  ): Promise<SwapRequest> => {
     const response = await axiosClient.post("/swap_requests", swapRequest);
     handleError(response);
-    return response.data;
+
+    return response.data.swap_request;
   },
-  getSwapRequest: async (id: string) => {
+  getSwapRequest: async (id: string): Promise<SwapRequest> => {
     const response = await axiosClient.get(`/swap_requests/${id}`);
     handleError(response);
-    return response.data;
+    return response.data.swap_request;
   },
   updateSwapRequest: async (id: string, swapRequest: Record<string, any>) => {
     const response = await axiosClient.put(`/swap_requests/${id}`, swapRequest);
@@ -34,7 +38,7 @@ const apiClient = {
     return response.data;
   },
 
-  getAvailableCurrencies: async (): Promise<string[]> => {
+  getAvailableCurrencies: async (): Promise<Record<string, number>> => {
     const response = await axiosClient.get("/exchange/currencies");
     handleError(response);
     return response.data.currencies;

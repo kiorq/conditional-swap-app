@@ -17,7 +17,11 @@ const Button = ({
   return (
     <button
       disabled={disabled}
-      className={`flex flex-row items-center gap-2 rounded-lg py-2 px-10 text-base font-semibold text-white cursor-pointer disabled:opacity-50 ${variantColors[variant]}`}
+      className={`
+        flex flex-row items-center justify-center gap-2 rounded-lg py-2 px-10 text-base font-semibold text-white cursor-pointer disabled:opacity-50 text-center 
+        ${variantColors[variant]}
+      `}
+      onClick={props.onClick}
       {...props}
     >
       {children}

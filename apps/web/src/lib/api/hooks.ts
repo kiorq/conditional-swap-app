@@ -16,6 +16,7 @@ export const useGetSwapRequest = (id: string) =>
   useQuery({
     queryKey: ["swap_requests", id],
     queryFn: () => apiClient.getSwapRequest(id),
+    enabled: !!id,
   });
 
 export const useUpdateSwapRequest = (id: string) =>
