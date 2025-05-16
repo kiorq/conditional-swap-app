@@ -30,7 +30,6 @@ describe("Swap Validators", () => {
       fromToken: "ETH",
       toToken: "USDC",
       exchangeRate: 100,
-      network: "mainnet",
       timestamp: new Date(),
     });
   });
@@ -48,7 +47,6 @@ describe("Swap Validators", () => {
     currentMarketTokenExchangeRate.fromToken = "ETH";
     currentMarketTokenExchangeRate.toToken = "USDC";
     currentMarketTokenExchangeRate.exchangeRate = 100;
-    currentMarketTokenExchangeRate.network = "mainnet";
     currentMarketTokenExchangeRate.timestamp = new Date();
 
     // validate swap request
@@ -73,7 +71,6 @@ describe("Swap Validators", () => {
     currentMarketTokenExchangeRate.fromToken = "ETH";
     currentMarketTokenExchangeRate.toToken = "USDC";
     currentMarketTokenExchangeRate.exchangeRate = 100;
-    currentMarketTokenExchangeRate.network = "mainnet";
     currentMarketTokenExchangeRate.timestamp = new Date();
 
     // validate swap request
@@ -98,7 +95,6 @@ describe("Swap Validators", () => {
     currentMarketTokenExchangeRate.fromToken = "ETH";
     currentMarketTokenExchangeRate.toToken = "USDC";
     currentMarketTokenExchangeRate.exchangeRate = 100;
-    currentMarketTokenExchangeRate.network = "mainnet";
     currentMarketTokenExchangeRate.timestamp = new Date();
     // validate swap request
     const result = await validateSwapRequest(
@@ -122,7 +118,6 @@ describe("Swap Validators", () => {
     currentMarketTokenExchangeRate.fromToken = "BTC";
     currentMarketTokenExchangeRate.toToken = "USDC";
     currentMarketTokenExchangeRate.exchangeRate = 100;
-    currentMarketTokenExchangeRate.network = "mainnet";
     currentMarketTokenExchangeRate.timestamp = new Date();
     // validate swap request
     const result = await validateSwapRequest(

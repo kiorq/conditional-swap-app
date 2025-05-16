@@ -68,7 +68,6 @@ describe("Swap Cron", () => {
         fromToken: "BTC",
         toToken: "USDT",
         exchangeRate: 100,
-        network: "1",
         timestamp: new Date(),
       }),
     ];

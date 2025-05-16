@@ -1,7 +1,7 @@
 import { SwapRequest } from "@/app/types";
 import axios, { AxiosResponse } from "axios";
 
-const API_URL = "http://localhost:3030";
+const API_URL = process.env.API_URL || "http://localhost:3030";
 
 const axiosClient = axios.create({
   baseURL: API_URL,
