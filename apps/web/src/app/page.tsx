@@ -1,7 +1,7 @@
 import CurrencyForm from "@/components/CurrencyForm";
 import DateRange from "@/components/DateRange";
 import OrderSteps from "@/components/OrderSteps";
-import SubmitButton from "@/components/SubmitButton";
+import SwapForm from "@/components/SwapForm";
 import SwapRequestsList from "@/components/SwapRequestsList";
 import ValueCard from "@/components/ValueCard";
 
@@ -10,13 +10,7 @@ export default function Home() {
     <div className="min-h-screen w-screen flex flex-col items-center justify-center">
       <div className="max-w-3xl flex flex-col gap-4">
         {/* form */}
-        <form className="flex flex-col gap-4 w-full">
-          <CurrencyForm />
-          <div className="flex flex-row gap-2 justify-between">
-            <DateRange />
-            <SubmitButton />
-          </div>
-        </form>
+        <SwapForm />
         {/* additional details */}
         <div className="max-w-3xl">
           <div className="flex flex-row gap-4">
