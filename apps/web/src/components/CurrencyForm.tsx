@@ -2,6 +2,7 @@ import Image from "next/image";
 import { currencyIcon, currencyName } from "@/lib/currencies";
 import { ChevronRightIcon, ChevronDownIcon } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { SwapFormData } from "./SwapForm";
 
 const CurrencyInput = ({
   label,
@@ -16,8 +17,8 @@ const CurrencyInput = ({
   currency: string;
   currencies: Record<string, number>;
   setCurrency: (currency: string) => void;
-  amount: number;
-  setAmount: (amount: number) => void;
+  amount: string;
+  setAmount: (amount: string) => void;
   editable: boolean;
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -42,13 +43,13 @@ const CurrencyInput = ({
     const val = e.target.value;
     // Allow empty string for controlled input, but treat as 0
     if (val === "") {
-      setAmount(0);
+      setAmount("0");
       return;
     }
     // Only allow valid numbers >= 0
     const num = parseFloat(val);
     if (!isNaN(num) && num >= 0) {
-      setAmount(num);
+      setAmount(val);
     }
   };
 
@@ -121,13 +122,6 @@ const CurrencyInput = ({
   );
 };
 
-interface ChangeData {
-  fromCurrency: string;
-  toCurrency: string;
-  fromAmount: number;
-  toAmount: number;
-}
-
 const CurrencyForm = ({
   currencies,
   onChange,
@@ -135,14 +129,9 @@ const CurrencyForm = ({
   initialData,
 }: {
   currencies: Record<string, number>;
-  onChange: (data: ChangeData) => void;
+  onChange: (data: SwapFormData) => void;
   editable: boolean;
-  initialData?: {
-    fromCurrency: string;
-    toCurrency: string;
-    fromAmount: number;
-    toAmount: number;
-  };
+  initialData?: Partial<SwapFormData>;
 }) => {
   const [fromCurrency, setFromCurrency] = useState(
     initialData?.fromCurrency || "eth"
@@ -150,8 +139,8 @@ const CurrencyForm = ({
   const [toCurrency, setToCurrency] = useState(
     initialData?.toCurrency || "btc"
   );
-  const [fromAmount, setFromAmount] = useState(initialData?.fromAmount || 0);
-  const [toAmount, setToAmount] = useState(initialData?.toAmount || 0);
+  const [fromAmount, setFromAmount] = useState(initialData?.fromAmount || "0");
+  const [toAmount, setToAmount] = useState(initialData?.toAmount || "0");
   const initialDataSetRef = useRef(false);
 
   useEffect(() => {
@@ -159,14 +148,14 @@ const CurrencyForm = ({
     if (initialDataSetRef.current) return;
 
     initialDataSetRef.current = true;
-    setFromCurrency(initialData.fromCurrency);
-    setToCurrency(initialData.toCurrency);
-    setFromAmount(initialData.fromAmount);
-    setToAmount(initialData.toAmount);
+    initialData.fromCurrency && setFromCurrency(initialData.fromCurrency);
+    initialData.toCurrency && setToCurrency(initialData.toCurrency);
+    initialData.fromAmount && setFromAmount(initialData.fromAmount);
+    initialData.toAmount && setToAmount(initialData.toAmount);
   }, [initialData]);
 
   const handleChange = useCallback(
-    (data: ChangeData) => {
+    (data: SwapFormData) => {
       onChange({
         fromCurrency: data.fromCurrency,
         toCurrency: data.toCurrency,
@@ -184,7 +173,7 @@ const CurrencyForm = ({
       fromAmount,
       toAmount,
     });
-  }, [fromCurrency, toCurrency, fromAmount, toAmount]);
+  }, [fromCurrency, toCurrency, fromAmount, toAmount, handleChange]);
 
   return (
     <div className=" w-full bg-gray-900 rounded-lg border border-gray-800 items-center">

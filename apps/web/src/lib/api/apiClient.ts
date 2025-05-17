@@ -20,7 +20,7 @@ const apiClient = {
     return response.data.swap_requests;
   },
   createSwapRequest: async (
-    swapRequest: Record<string, any>
+    swapRequest: Partial<SwapRequest>
   ): Promise<SwapRequest> => {
     const response = await axiosClient.post("/swap_requests", swapRequest);
     handleError(response);
@@ -32,7 +32,7 @@ const apiClient = {
     handleError(response);
     return response.data.swap_request;
   },
-  updateSwapRequest: async (id: string, swapRequest: Record<string, any>) => {
+  updateSwapRequest: async (id: string, swapRequest: Partial<SwapRequest>) => {
     const response = await axiosClient.put(`/swap_requests/${id}`, swapRequest);
     handleError(response);
     return response.data;

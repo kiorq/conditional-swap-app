@@ -19,9 +19,9 @@ export async function createSwapRequest(data: {
     .values({
       fromToken: data.fromToken,
       toToken: data.toToken,
-      fromAmount: data.fromAmount,
-      toAmount: data.toAmount,
-      minThreshold: data.minThreshold,
+      fromAmount: data.fromAmount.toString(),
+      toAmount: data.toAmount.toString(),
+      minThreshold: data.minThreshold.toString(),
       startDate: data.startDate,
       endDate: data.endDate,
       status: SwapRequestStatus.PENDING,

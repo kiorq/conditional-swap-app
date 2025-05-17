@@ -2,16 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { currencyIcon, currencyName } from "@/lib/currencies";
-
-export type SwapRequest = {
-  id: string;
-  fromToken: string;
-  toToken: string;
-  fromAmount: number;
-  toAmount: number;
-  status: "pending" | "fulfilled" | "expired" | "cancelled" | "invalid";
-  date: string; // ISO string
-};
+import { SwapRequest } from "@/app/types";
 
 const statusColor = {
   fulfilled: "text-green-400 bg-green-900",
@@ -28,6 +19,8 @@ const statusLabel = {
   cancelled: "Cancelled",
   invalid: "Invalid",
 };
+
+const getStatus = (req: SwapRequest) => req.status as keyof typeof statusLabel;
 
 const SwapRequestsList = ({ requests }: { requests: SwapRequest[] }) => {
   const router = useRouter();
@@ -74,9 +67,9 @@ const SwapRequestsList = ({ requests }: { requests: SwapRequest[] }) => {
           </div>
           {/* Status */}
           <div
-            className={`ml-6 px-3 py-1 rounded-full text-xs font-bold ${statusColor[req.status]}`}
+            className={`ml-6 px-3 py-1 rounded-full text-xs font-bold ${statusColor[getStatus(req)]}`}
           >
-            {statusLabel[req.status]}
+            {statusLabel[getStatus(req)]}
           </div>
           {/* Date */}
           <div className="ml-auto text-gray-500 text-xs font-mono">

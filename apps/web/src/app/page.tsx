@@ -1,5 +1,5 @@
 "use client";
-import SwapForm from "@/components/SwapForm";
+import SwapForm, { SwapFormData } from "@/components/SwapForm";
 import { useState } from "react";
 import { useCreateSwapRequest } from "@/lib/api/hooks";
 import { useRouter } from "next/navigation";
@@ -8,8 +8,7 @@ import { useEffect } from "react";
 export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const createSwapRequest = useCreateSwapRequest();
-  const onSubmit = (formData: any) => {
-    debugger;
+  const onSubmit = (formData: SwapFormData) => {
     setError(null);
     // frontend validation
     if (!formData.startDate) {
@@ -21,24 +20,25 @@ export default function Home() {
       return;
     }
 
-    if (formData.fromAmount <= 0) {
+    if (parseFloat(formData.fromAmount) <= 0) {
       setError("From amount must be greater than 0");
       return;
     }
 
-    if (formData.toAmount <= 0) {
+    if (parseFloat(formData.toAmount) <= 0) {
       setError("To amount must be greater than 0");
       return;
     }
-    const minThreshold = formData.toAmount / formData.fromAmount;
+    const minThreshold =
+      parseFloat(formData.toAmount) / parseFloat(formData.fromAmount);
     createSwapRequest.mutate({
       fromToken: formData.fromCurrency,
       toToken: formData.toCurrency,
       fromAmount: formData.fromAmount,
       toAmount: formData.toAmount,
-      minThreshold: minThreshold,
-      startDate: formData.startDate,
-      endDate: formData.endDate,
+      minThreshold: minThreshold.toString(),
+      startDate: formData.startDate!.toISOString(),
+      endDate: formData.endDate!.toISOString(),
     });
   };
 
@@ -73,8 +73,8 @@ export default function Home() {
           initialData={{
             fromCurrency: "eth",
             toCurrency: "btc",
-            fromAmount: 100,
-            toAmount: 100,
+            fromAmount: "100",
+            toAmount: "100",
           }}
         />
       </div>

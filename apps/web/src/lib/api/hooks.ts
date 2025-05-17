@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import apiClient from "./apiClient";
+import { SwapRequest } from "@/app/types";
 
 export const useSwapRequests = () =>
   useQuery({
@@ -21,7 +22,7 @@ export const useGetSwapRequest = (id: string) =>
 
 export const useUpdateSwapRequest = (id: string) =>
   useMutation({
-    mutationFn: (swapRequest: Record<string, any>) =>
+    mutationFn: (swapRequest: Partial<SwapRequest>) =>
       apiClient.updateSwapRequest(id, swapRequest),
   });
 

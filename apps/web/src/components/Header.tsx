@@ -7,7 +7,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="top-0 left-0 w-full  border-b border-gray-800 z-50 sticky top-0 bg-gray-900">
+    <nav className="left-0 w-full  border-b border-gray-800 z-50 sticky top-0 bg-gray-900">
       <div className="max-w-3xl mx-auto flex items-center justify-between px-4 py-3">
         {/* Title */}
         <Link href="/" className="text-3xl font-bold text-white font-mono">
@@ -15,18 +15,18 @@ const Header = () => {
         </Link>
         {/* Desktop links */}
         <div className="hidden sm:flex gap-4 items-center">
-          <a
+          <Link
             href="/swap"
             className="text-gray-300 hover:text-white font-medium transition-colors"
           >
             History
-          </a>
-          <a
+          </Link>
+          <Link
             href="/"
             className="text-white px-4 py-1.5 rounded-lg transition-colors"
           >
             Create Swap
-          </a>
+          </Link>
         </div>
         {/* Mobile hamburger */}
         <button

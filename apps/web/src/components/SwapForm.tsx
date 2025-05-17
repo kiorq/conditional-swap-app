@@ -6,6 +6,15 @@ import DateRange from "./DateRange";
 
 import { useGetAvailableCurrencies } from "@/lib/api/hooks";
 
+export interface SwapFormData {
+  startDate?: Date;
+  endDate?: Date;
+  fromCurrency: string;
+  toCurrency: string;
+  fromAmount: string;
+  toAmount: string;
+}
+
 const SwapForm = ({
   message,
   isSubmittable = false,
@@ -17,22 +26,18 @@ const SwapForm = ({
   message?: string;
   isSubmittable?: boolean;
   isCancelable?: boolean;
-  onSubmit: (formData: any) => void;
+  onSubmit: (formData: SwapFormData) => void;
   onCancel: () => void;
   isLoading?: boolean;
-  initialData?: {
-    fromCurrency: string;
-    toCurrency: string;
-    fromAmount: string;
-    toAmount: string;
-  };
+  initialData?: Partial<SwapFormData>;
 }) => {
   const { data: currencies } = useGetAvailableCurrencies();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SwapFormData>({
+    ...(initialData || {}),
     fromCurrency: "eth",
     toCurrency: "btc",
-    fromAmount: 0,
-    toAmount: 0,
+    fromAmount: "0",
+    toAmount: "0",
   });
 
   const onDateRangeChange = (dateRange: { startDate: Date; endDate: Date }) => {
@@ -50,7 +55,7 @@ const SwapForm = ({
   return (
     <div className="flex flex-col gap-4 w-full">
       <CurrencyForm
-        currencies={currencies}
+        currencies={currencies || {}}
         onChange={setFormData}
         editable={isSubmittable}
         initialData={initialData}
