@@ -1,0 +1,21 @@
+services:
+  api:
+    build:
+      dockerfile: ./apps/api/Dockerfile
+    ports:
+      - "3030:3030"
+    environment:
+      - PORT=3030
+    command: ["node", "app.js"]
+
+  web:
+    build:
+
+      dockerfile: ./apps/web/Dockerfile
+    ports:
+      - "3031:3031" # change the exposed port for the web service (nextjs app)
+    environment:
+      - PORT=3031
+      - API_URL=http://localhost:3030 # ensure this matches with the exposed port in the api service
+
+    command: ["node", "server.js"]

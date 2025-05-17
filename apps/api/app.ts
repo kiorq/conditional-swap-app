@@ -3,7 +3,7 @@ import Fastify from "fastify";
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import runSwapCron from "./cron/swap_cron";
 
-const PORT = parseInt(process.env.PORT || "3030", 10);
+const PORT = parseInt(process.env.API_PORT || "3030", 10);
 
 const fastify = Fastify({
   logger: true,
@@ -32,7 +32,7 @@ fastify.register(require("./domains/exchange/routes"), {
 const runServer = async () => {
   try {
     console.log(`Server is running on http://localhost:${PORT}`);
-    await fastify.listen({ port: PORT });
+    await fastify.listen({ port: PORT, host: "0.0.0.0" });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
