@@ -2,7 +2,28 @@
 
 by Kirk Douglas
 
-## Setup
+# Setup with Dev Containers
+
+Both the API and Web apps are fully dockerized and integrated with VS Code's Dev Containers.
+
+## Requirements
+
+- VS Code with the Dev Containers extension installed
+  (Install it from the Extensions Marketplace if not already included)
+
+## Getting Started
+
+1. Open the project in VS Code
+2. Select: **Dev Containers: Reopen in Container**
+
+Once launched, both services will be running locally:
+
+- Web: http://localhost:3031
+- API: http://localhost:3030
+
+Note: You can customize the exposed ports by editing `docker-compose.yml`.
+
+## Setup for local developement
 
 ```
 npm i

@@ -1,0 +1,8 @@
+{
+  "name": "Conditional Swap App",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "api",
+  "workspaceFolder": "/apps",
+  "shutdownAction": "stopCompose",
+  "forwardPorts": [3030, 3031]
+}
